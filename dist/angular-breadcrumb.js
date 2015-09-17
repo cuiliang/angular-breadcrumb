@@ -1,4 +1,4 @@
-/*! angular-breadcrumb - v0.4.0-dev-2015-08-07
+/*! angular-breadcrumb - v0.4.1-dev-2015-09-17
 * http://ncuillery.github.io/angular-breadcrumb
 * Copyright (c) 2015 Nicolas Cuillery; Licensed MIT */
 
@@ -79,7 +79,15 @@ function $Breadcrumb() {
                     parentParams = $lastViewScope.$eval(ref.paramExpr);
                 }
 
-                conf.ncyBreadcrumbLink = $state.href(ref.state, parentParams || $stateParams || {});
+				if (conf.abstract)
+				{
+					//generate default child state link if abstract. 
+					conf.ncyBreadcrumbLink = $state.href(ref.state + ".index", parentParams || $stateParams || {});
+				}else
+				{
+					conf.ncyBreadcrumbLink = $state.href(ref.state, parentParams || $stateParams || {});
+				}
+                
                 chain.unshift(conf);
             }
         };

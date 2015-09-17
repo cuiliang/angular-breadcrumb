@@ -74,7 +74,15 @@ function $Breadcrumb() {
                     parentParams = $lastViewScope.$eval(ref.paramExpr);
                 }
 
-                conf.ncyBreadcrumbLink = $state.href(ref.state, parentParams || $stateParams || {});
+				if (conf.abstract)
+				{
+					//generate default child state link if abstract. 
+					conf.ncyBreadcrumbLink = $state.href(ref.state + ".index", parentParams || $stateParams || {});
+				}else
+				{
+					conf.ncyBreadcrumbLink = $state.href(ref.state, parentParams || $stateParams || {});
+				}
+                
                 chain.unshift(conf);
             }
         };
